@@ -3,7 +3,7 @@ block head
   script(type='text/javascript')
     $(document).ready(function() {
       $('#api').bind('ready.rdio', function() {
-        $(this).rdio().play('a1820904');
+        $(this).rdio().play('#{id}');
       });
       
       // this is a valid playback token for localhost.
