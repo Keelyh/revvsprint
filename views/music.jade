@@ -1,0 +1,15 @@
+extends layout
+block head
+  script(type='text/javascript')
+    $(document).ready(function() {
+      $('#api').bind('ready.rdio', function() {
+        $(this).rdio().play('a1820904');
+      });
+      
+      // this is a valid playback token for localhost.
+      // but you should go get your own for your own domain.
+      $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');
+    });
+
+block content  
+  #api
