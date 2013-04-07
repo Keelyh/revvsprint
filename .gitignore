@@ -1,3 +1,4 @@
 node_modules
 .env
-.DS_STOREProcfile.dev
+.DS_STORE
+Procfile.dev

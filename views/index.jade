@@ -4,27 +4,22 @@ block content
   h1= title
   div(class = 'songs')
     form
-      input(type='text', name = 'song', placeholder = 'Song Name')
       input(type='text', name = 'activity', placeholder = 'Activity')
       input(type='text', name = 'time', placeholder = 'Time')
-      input(type='submit', value = 'Search Song', class = 'songsearch', onClick = "showsongs()")
+      input(type='text', name = 'song', placeholder = 'Song Name')
+      input(type='submit', value = 'Search Song', class = 'songsearch', onClick = "this.onclick=null; showsongs(this); return false")
       input(type='submit', value = '-',onClick="$(this).parent().remove()", class = 'removefield')
   input(type='submit', value = '+', class = 'addsong')
 
-  script
-    $(function () {
-      function showsongs (){
-        console.log("hello bitch");
-        // $.post('/showsongs', $(this).parent().serialize(), function(html) {
-        //   $(this).parent().append(html);
-        // });
+  script(type='text/javascript')
+    function showsongs(e){
+      $.post('/showsongs', {'song': e.previousSibling.value}, function(html){
+        e.parentNode.parentNode.innerHTML += html;
         return false;
-      }
-      return false;
-    });
-  script
+        })
+    };
     $('.addsong').click(function() {
-      $('<form><input type="text" name="song" placeholder="Song Name"/><input type="text" name="activity" placeholder="Activity"/><input type="text" name="time" placeholder="Time"/><input type="submit" value="Search Song" class="removefield"/><input type="submit" value="-" class="removefield" onClick="$(this).parent().remove();"/></form>').appendTo('.songs');
+      $('<form><input type="text" name="song" placeholder="Song Name"/><input type="text" name="activity" placeholder="Activity"/><input type="text" name="time" placeholder="Time"/><input type="submit" value="Search Song" class="songsearch" onClick="showsongs();"/><input type="submit" value="-" class="removefield" onClick="$(this).parent().remove();"/></form>').appendTo('.songs');
     return false;
     });
 
