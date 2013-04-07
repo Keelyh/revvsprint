@@ -1,7 +1,0 @@
-extends layout
-block content
-  h2 Click a song name to play that song
-  each song in songs
-    p
-      a(href='/play/#{song.key}') #{song.name}
-      |  by #{song.artist}
