@@ -27,8 +27,11 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.post('/search', routes.getSongKey);
+//app.post('/search', routes.getSongKey);
 app.get('/play/:key', routes.playSong);
+app.get('/test', routes.test);
+app.post('/showsongs', routes.showsongs);
+//app.post('/addsong', routes.addsong);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
