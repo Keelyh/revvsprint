@@ -1,30 +1,37 @@
 extends layout
 
+block head
+  script(src='/javascripts/jquery.simplemodal.1.4.4.min.js')
+  link(rel='stylesheet', href='/stylesheets/basic.css')
+  //if lt IE 7
+      link(rel='stylesheet', href='/stylesheets/basic_ie.css')
+
 block content
   h1= title
+  // preload this image
+  div(style='display: none;')
+    img(src='/images/x.png', alt='')
+
   div(class = 'songs')
     form
       input(type='text', name = 'activity', placeholder = 'Activity')
       input(type='text', name = 'time', placeholder = 'Time')
       input(type='text', name = 'song', placeholder = 'Song Name')
-      input(type='submit', value = 'Search Song', class = 'songsearch', onClick = "this.onclick=null; showsongs(this); return false")
-      input(type='submit', value = '-',onClick="$(this).parent().remove()", class = 'removefield')
-  input(type='submit', value = '+', class = 'addsong')
+      input(type='submit', value = 'Search Song', class = 'songSearch', onClick = "showsongs(this); return false")
+      input(type='submit', value = '-', class = 'removefield', onClick="$(this).parent().remove(); return false")
+  input(type='submit', value = '+', class = 'addSong')
 
   script(type='text/javascript')
     function showsongs(e){
-      $.post('/showsongs', {'song': e.previousSibling.value}, function(html){
-        e.parentNode.parentNode.innerHTML += html;
+      $.post('/showsongs', {'query': e.previousSibling.value}, function(html){
+        var div = document.createElement("div");
+        div.setAttribute("class", "songList");
+        div.innerHTML = html;
+        $.modal(html);
         return false;
         })
     };
-    $('.addsong').click(function() {
-      $('<form><input type="text" name="song" placeholder="Song Name"/><input type="text" name="activity" placeholder="Activity"/><input type="text" name="time" placeholder="Time"/><input type="submit" value="Search Song" class="songsearch" onClick="showsongs();"/><input type="submit" value="-" class="removefield" onClick="$(this).parent().remove();"/></form>').appendTo('.songs');
+    $('.addSong').click(function() {
+      $('<form><input type="text" name="activity" placeholder="Activity"/><input type="text" name="time" placeholder="Time"/><input type="text" name="song" placeholder="Song Name"/><input type="submit" value="Search Song" class="songSearch" onClick="showsongs(this); return false"/><input type="submit" value="-" class="removefield" onClick="$(this).parent().remove(); return false"/></form>').appendTo('.songs');
     return false;
     });
-
-    var remove_p = function() {
-      $(this).parent().remove();
-      console.log('remove');
-      return false;
-    };
