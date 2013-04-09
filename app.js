@@ -27,9 +27,10 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/home', routes.homepage);
 //app.post('/search', routes.getSongKey);
 app.get('/play/:key', routes.playSong);
-app.get('/test', routes.test);
+//app.get('/test', routes.test);
 app.post('/showsongs', routes.showsongs);
 //app.post('/addsong', routes.addsong);
 

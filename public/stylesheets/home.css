@@ -1,0 +1,12 @@
+#video {
+	display: inline-block;
+	vertical-align:middle;
+}
+
+#quote {
+	font-style:italic;
+	display: inline-block;
+	padding-left: 50px;
+	width: 300px;
+	vertical-align:middle;
+}

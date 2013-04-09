@@ -15,8 +15,7 @@ exports.playSong = function(req, res){
 	res.render('music', { title: 'Musica', id: req.params.key });
 }
 
-exports.test = function(req, res) {
-	res.render('test', {title: 'Test'})
+exports.homepage = function(req, res) {
+	res.render('homepage', { title: 'Musicify'});
 }
-
 
