@@ -1,12 +1,13 @@
 extends layout 
 block head
-	link(rel='stylesheet', href='/stylesheets/home.css')	
+  link(rel='stylesheet', href='/stylesheets/home.css')
 
 block content
-	h1= title
+  .container
+    h1 Welcome to #{title}
+    br
+    div(id = 'video')
+      iframe(width='560', height='315', src='http://www.youtube.com/embed/DgsNjTyGsRk#t=44s', frameborder='0', allowfullscreen='allowfullscreen')
 
-	div(id = 'video')
-		iframe(width='560', height='315', src='http://www.youtube.com/embed/DgsNjTyGsRk', frameborder='0', allowfullscreen='allowfullscreen')
-
-	div(id = 'quote')
-		h3 blah blah blah something inspirational to make you want to use this product blah blah blah
+    div(id = 'quote')
+      h3 blah blah blah something inspirational to make you want to use this product blah blah blah

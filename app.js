@@ -4,6 +4,8 @@
  */
 
 var express = require('express')
+  , mongoose = require('mongoose')
+  , models = require('./models')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path');
@@ -20,19 +22,33 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+
+  var uristring = 
+    process.env.MONGODB_URI ||
+    process.env.MONGOLAB_URI ||
+    'mongodb://localhost/revv';
+  var mongoOptions = { db: { safe: true }};
+
+  mongoose.connect(uristring, mongoOptions, function (err, res) {
+    if (err) {
+      console.log('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+      console.log('Succeeded connecting to:' + uristring + '.');
+    }
+  });
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/home', routes.homepage);
+app.get('/', routes.homepage);
+app.get('/newRoutine', routes.index);
 //app.post('/search', routes.getSongKey);
 app.get('/play/:key', routes.playSong);
-//app.get('/test', routes.test);
 app.post('/showsongs', routes.showsongs);
 //app.post('/addsong', routes.addsong);
+app.post('/newRoutine', routes.addToMongo);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -1,5 +1,18 @@
-h3 Click a song name to select that song
-each song in songs
-  p
-    .songname(id=song.key)
-      | #{song.name} by #{song.artist}
+h3 Select your song
+each song, i in songs
+  .selectSong.simplemodal-close(style='padding: 5px')
+    input#song(type='hidden', value=song.name)
+    input#artist(type='hidden', value=song.artist)
+    input#key(type='hidden', value=song.key)
+    i.icon-ok.icon-white
+    | &nbsp; 
+    b #{song.name}
+    |  by #{song.artist}
+
+script
+  $('.selectSong').click(function() {
+    $('#songName').val($(this).children(':nth-child(1)').val());
+    $('#artist').val($(this).children(':nth-child(2)').val());
+    $('#key').val($(this).children(':nth-child(3)').val());
+    return false;
+  })

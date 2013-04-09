@@ -2,36 +2,85 @@ extends layout
 
 block head
   script(src='/javascripts/jquery.simplemodal.1.4.4.min.js')
+  script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js')
   link(rel='stylesheet', href='/stylesheets/basic.css')
   //if lt IE 7
-      link(rel='stylesheet', href='/stylesheets/basic_ie.css')
+    link(rel='stylesheet', href='/stylesheets/basic_ie.css')
+  script(type='text/javascript')
+    $(function() {
+      $( "#sortable" ).sortable();
+      $( "#sortable" ).disableSelection();
+    });
 
 block content
-  h1= title
-  // preload this image
+  .container
+    .row
+      fieldset
+        legend Add an Activity
+    .row
+      form
+        .span3
+          input#activity(type='text', name = 'activity', placeholder = 'Activity')
+          //input(type='text', name = 'duration', placeholder = 'Duration')
+        .span6.offset1.input-append
+          input#songName(type='text', name = 'song', placeholder = 'Song Name')
+          input.btn(type='submit', value = 'Search Song', class = 'songSearch', onClick = "showsongs(this); return false")
+          input#artist(type='hidden')
+          input#key(type='hidden')
+        .span1
+          input.btn(type='submit', value = 'Add to Routine', class = 'addActivity')       
+    .row.hideRoutine(style='display:show; margin-top:30px')
+      fieldsest
+        legend Your Routine: &nbsp;
+          input#routineName(type='text', placeholder= 'Routine Name')
+        ul#sortable
+        .row(style='margin-top:30px')
+          .span2
+            input.btn(type='submit', value='Save Routine', id='submitRoutine')
+
   div(style='display: none;')
     img(src='/images/x.png', alt='')
-
-  div(class = 'songs')
-    form
-      input(type='text', name = 'activity', placeholder = 'Activity')
-      input(type='text', name = 'time', placeholder = 'Time')
-      input(type='text', name = 'song', placeholder = 'Song Name')
-      input(type='submit', value = 'Search Song', class = 'songSearch', onClick = "showsongs(this); return false")
-      input(type='submit', value = '-', class = 'removefield', onClick="$(this).parent().remove(); return false")
-  input(type='submit', value = '+', class = 'addSong')
+    //to preload image
 
   script(type='text/javascript')
+    var i = 0;
     function showsongs(e){
       $.post('/showsongs', {'query': e.previousSibling.value}, function(html){
         var div = document.createElement("div");
-        div.setAttribute("class", "songList");
         div.innerHTML = html;
         $.modal(html);
         return false;
-        })
+      })
     };
-    $('.addSong').click(function() {
-      $('<form><input type="text" name="activity" placeholder="Activity"/><input type="text" name="time" placeholder="Time"/><input type="text" name="song" placeholder="Song Name"/><input type="submit" value="Search Song" class="songSearch" onClick="showsongs(this); return false"/><input type="submit" value="-" class="removefield" onClick="$(this).parent().remove(); return false"/></form>').appendTo('.songs');
-    return false;
-    });
+    $('.addActivity').click(function() {
+      $('.hideRoutine').show();
+      var act = $('#activity').val();
+      var song = $('#songName').val();
+      var artist = $('#artist').val();
+      var key = $('#key').val();
+      $('<li id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" activity="'+act+'"><i class="icon-move"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
+      $('#activity').val('');
+      $('#songName').val('');
+      i++;
+      return false;
+    })
+    $('#submitRoutine').click(function() {
+      var routineName = $('#routineName').val();
+      var ids = $('#sortable').sortable('toArray');
+      var activityArray = [];
+      ids.forEach(function(id, playOrder){
+        var activity = [];
+        activity.push($('#'+id).attr('activity'));
+        activity.push(playOrder);
+        activity.push($('#'+id).attr('song'));
+        activity.push($('#'+id).attr('key'));
+        activityArray.push(activity);
+      })
+      $.ajax({
+        url: '/newRoutine',
+        type: 'POST',
+        data: JSON.stringify({'routine': routineName, 'activities': activityArray}),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8'
+        })
+      });

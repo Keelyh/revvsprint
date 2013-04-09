@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.0.6",
     "jade": "*",
-    "node-rdio": "0.1.1"
+    "node-rdio": "0.1.1",
+    "mongoose": "3.6.x"
   }
 }
