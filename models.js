@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
 	name: String,
@@ -25,3 +25,4 @@ var activitySchema = new Schema({
 });
 
 mongoose.model('Activity', activitySchema);
+

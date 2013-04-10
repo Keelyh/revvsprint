@@ -2,6 +2,7 @@ var Rdio = require('node-rdio')
   , mongoose = require('mongoose')
   , User = mongoose.model('User')
   , Routine = mongoose.model('Routine')
+  , models = require('../models')
   , Activity = mongoose.model('Activity');
 
 exports.index = function(req, res){
@@ -43,3 +44,8 @@ exports.addToMongo = function(req, res){
 	});
 }
 
+exports.myroutines = function(req, res){
+	Routine.find().exec(function (err, routines){
+		res.render('myroutines', {title:'Musicify', routines: routines});
+	});
+}

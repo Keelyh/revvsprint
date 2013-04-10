@@ -5,6 +5,7 @@ block head
     $(document).ready(function() {
       $('#api').bind('ready.rdio', function() {
         $(this).rdio().play('#{id}');
+        // $(this).rdio().play('#{id}');
       });
       
       // this is a valid playback token for localhost.

@@ -1,0 +1,9 @@
+extends layout 
+block head
+  link(rel='stylesheet', href='/stylesheets/myroutines.css')
+
+block content
+  .container
+    for routine in routines
+      #{routine}
+    | HELLLLOOOOO!!!!
