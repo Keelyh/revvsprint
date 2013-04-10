@@ -50,6 +50,8 @@ app.get('/play/:key', routes.playSong);
 app.post('/showsongs', routes.showsongs);
 //app.post('/addsong', routes.addsong);
 app.post('/newRoutine', routes.addToMongo);
+app.post('/songsinroutine', routes.songsinroutine);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

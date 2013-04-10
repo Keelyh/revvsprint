@@ -36,7 +36,7 @@ exports.addToMongo = function(req, res){
 				songKey: activity[3]
 			}).save(function(err, actDoc){
 				if (err) throw err;
-				routine.update( { $push: {activities: actDoc}}, function(err){
+				routine.update( { $push: {_activities: actDoc}}, function(err){
 					if (err) throw err;
 				});
 			});
@@ -45,7 +45,18 @@ exports.addToMongo = function(req, res){
 }
 
 exports.myroutines = function(req, res){
-	Routine.find().exec(function (err, routines){
+	Routine.find().populate('_activities').exec(function (err, routines){
 		res.render('myroutines', {title:'Musicify', routines: routines});
 	});
 }
+
+
+exports.songsinroutine = function(req, res){
+  console.log("partial function");
+  console.log(req.body);
+	Routine.find({title:req.body}).populate('_activities').exec(function (err, songs){
+		console.log(songs);
+		res.render('_songsinroutine', {title:'Musicify', songs: songs});
+	});
+	//res.render('_songsinroutine', {title:'Musicify'});
+};

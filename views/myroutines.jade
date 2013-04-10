@@ -3,7 +3,20 @@ block head
   link(rel='stylesheet', href='/stylesheets/myroutines.css')
 
 block content
-  .container
+  .container(id='routinelist')
     for routine in routines
-      #{routine}
-    | HELLLLOOOOO!!!!
+      p(class='routineName', id='#{routine.title}')
+        | #{routine.title}
+
+        br
+  div(id = "songlist")
+    include _songsinroutine.jade
+
+
+
+  script
+    $('.routineName').on('click',function(){
+      console.log(this.id);
+      $.post("/songsinroutine", {"title":this.id});
+      return false;
+    });

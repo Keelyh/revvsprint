@@ -3,13 +3,13 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
 	name: String,
-	routines: [{ type: Schema.Types.ObjectId, ref: 'Routine' }]
+	_routines: [{ type: Schema.Types.ObjectId, ref: 'Routine' }]
 });
 
 mongoose.model('User', userSchema);
 
 var routineSchema = new Schema({
-	activities: [{ type: Schema.Types.ObjectId, ref: 'Activity' }],
+	_activities: [{ type: Schema.Types.ObjectId, ref: 'Activity' }],
 	title: String
 });
 
