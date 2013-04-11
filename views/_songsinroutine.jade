@@ -2,8 +2,9 @@
 h3 #{routine[0].title}
 for song in routine[0]._activities
   p.song(songId=song.songKey) #{song.songName}
-input.btn(id= 'playbutton', type='submit', value='Play')
-input.btn(id= 'editbutton', type='submit', value='Edit')
+button.btn(id= 'playbutton', type='button') Play
+&nbsp;
+button.btn(id= 'editbutton', type='button') Edit
 #music
 
 script

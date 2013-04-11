@@ -3,30 +3,29 @@ block head
   script(src='/javascripts/jquery.rdio.min.js')
   script(type='text/javascript')
     var idlist = '#{idlist}'.split(',');
-    console.log('ids: ', idlist);
     var i = 0, len=idlist.length;
-    var done = false;
+    var playNextSong = 1;
     $(document).ready(function() {
       $('#api').bind('ready.rdio', function() {
-        $(this).rdio().play();
-        // i++;
-        // // while(done==false){};
-        // $(this).rdio().play(idlist[1]);
+        $(this).rdio().play(idlist[i]);
+        // $(this).rdio().play('t27908546');
       });
       $('#api').bind('playStateChanged.rdio', function(e, playState) {
-            if (playState == 2) {
-              console.log(i);
-              console.log(idlist[i]);
-              $(this).rdio().play(idlist[i]);
-              i++;           
-            };
+        if (playNextSong == 0 && playState == 2 && i < len-1) {
+          // if playNextSong was off but playback stopped (playState = 2), play next.
+          playNextSong = 1;
+          i++;
+          $(this).rdio().play(idlist[i]);
+          // $(this).rdio().play('t2843284');
+        } else if (playState==1) {
+          playNextSong = 0;
+        }
       });
-      
       // this is a valid playback token for localhost.
       // but you should go get your own for your own domain.
       $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');
     });
 
 block content
-  h2 Music will play
+  h4 Music will play
   #api

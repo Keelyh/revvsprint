@@ -1,24 +1,22 @@
 extends layout 
-block head
-  link(rel='stylesheet', href='/stylesheets/myroutines.css')
+
 
 block content
-  .container(id='routinelist')
-    h3 My Routines
-    for routine in routines
-      p(class='routineName', id='#{routine.title}')
-        | #{routine.title}
-
-        br
-  div(id = "songlist")
-    
-
-
+  .container#routinelist
+    .row
+      .span6
+        .row
+          h3 My Routines
+        for routine in routines
+          .row
+            .routineName(id='#{routine.title}') #{routine.title}
+            br
+      .span6
+        #songlist
 
   script
-    $('.routineName').on('click',function(){
-      console.log(this.id);
-      $.post("/songsinroutine", {"title":this.id},function(html){
+    $('.routineName').click(function(){
+      $.post("/songsinroutine", {"title":this.id}, function(html){
         $('#songlist').html(html);
         });
       return false;
