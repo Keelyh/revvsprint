@@ -4,9 +4,12 @@ body {
 }
 
 #routinelist {
-	display: inline-block;
-  /*width: 100%;*/
+  display: inline-block;
+  width: 50%;
   text-align: left;
 }
 
-songlist
+#songlist{
+  display: inline-block;
+  width: 50%;	
+}

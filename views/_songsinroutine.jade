@@ -1,1 +1,6 @@
-h3| Your Routine
+
+h3 #{routine[0].title}
+for song in routine[0]._activities
+  p #{song.songName}
+input.btn(id= 'playbutton', type='submit', value='Play')
+input.btn(id= 'editbutton', type='submit', value='Edit')

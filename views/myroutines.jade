@@ -4,19 +4,22 @@ block head
 
 block content
   .container(id='routinelist')
+    h3 My Routines
     for routine in routines
       p(class='routineName', id='#{routine.title}')
         | #{routine.title}
 
         br
   div(id = "songlist")
-    include _songsinroutine.jade
+    
 
 
 
   script
     $('.routineName').on('click',function(){
       console.log(this.id);
-      $.post("/songsinroutine", {"title":this.id});
+      $.post("/songsinroutine", {"title":this.id},function(html){
+        $('#songlist').html(html);
+        });
       return false;
     });

@@ -52,11 +52,9 @@ exports.myroutines = function(req, res){
 
 
 exports.songsinroutine = function(req, res){
-  console.log("partial function");
-  console.log(req.body);
-	Routine.find({title:req.body}).populate('_activities').exec(function (err, songs){
-		console.log(songs);
-		res.render('_songsinroutine', {title:'Musicify', songs: songs});
+	Routine.find({'title':req.body.title}).populate('_activities').exec(function (err, routine){
+		console.log(routine);
+		res.render('_songsinroutine', {title:'Musicify', routine: routine});
 	});
 	//res.render('_songsinroutine', {title:'Musicify'});
 };
