@@ -56,7 +56,7 @@ exports.myroutines = function(req, res){
 
 
 exports.songsinroutine = function(req, res){
-	Routine.find({'title':req.body.title}).populate('_activities').exec(function (err, routine){
+	Routine.find({'title':req.body.title}).populate('_activities', null, null, { sort: [['order', 'asc']] }).exec(function (err, routine){
 		console.log(routine);
 		res.render('_songsinroutine', {title:'Tempo', routine: routine});
 	});

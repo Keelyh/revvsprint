@@ -2,15 +2,24 @@
 block head
   script(src='/javascripts/jquery.rdio.min.js')
   script(type='text/javascript')
+    var idlist = '#{idlist}'.split(',');
+    console.log('ids: ', idlist);
+    var i = 0, len=idlist.length;
+    var done = false;
     $(document).ready(function() {
       $('#api').bind('ready.rdio', function() {
-        var idlist = '#{idlist}'.split(',');
-        var i =0, len=idlist.length;
-        for (; i<len; ){
-          console.log(idlist[i]);
-          $('#api').rdio().play(idlist[i]);
-        }
-        $('#api').rdio().play();
+        $(this).rdio().play();
+        // i++;
+        // // while(done==false){};
+        // $(this).rdio().play(idlist[1]);
+      });
+      $('#api').bind('playStateChanged.rdio', function(e, playState) {
+            if (playState == 2) {
+              console.log(i);
+              console.log(idlist[i]);
+              $(this).rdio().play(idlist[i]);
+              i++;           
+            };
       });
       
       // this is a valid playback token for localhost.

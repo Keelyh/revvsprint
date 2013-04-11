@@ -12,7 +12,6 @@ script
     $('p.song').each(function(i, p){
       idlist.push(p.getAttribute('songId'));
       });
-    console.log(idlist);
     $.get("/playsongs", {"ids":idlist}, function(html){
       $('#music').html(html);
     });
