@@ -4,10 +4,11 @@ each song, i in songs
     input#song(type='hidden', value=song.name)
     input#artist(type='hidden', value=song.artist)
     input#key(type='hidden', value=song.key)
-    i.icon-ok.icon-white
-    | &nbsp; 
-    b #{song.name}
-    |  by #{song.artist}
+    div(style='cursor: pointer')
+      i.icon-ok.icon-white
+      | &nbsp; 
+      b #{song.name}
+      |  by #{song.artist}
 
 script
   $('.selectSong').click(function() {
