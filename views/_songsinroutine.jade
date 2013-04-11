@@ -1,6 +1,20 @@
 
 h3 #{routine[0].title}
 for song in routine[0]._activities
-  p #{song.songName}
+  p.song(songId=song.songKey) #{song.songName}
 input.btn(id= 'playbutton', type='submit', value='Play')
 input.btn(id= 'editbutton', type='submit', value='Edit')
+#music
+
+script
+  $('#playbutton').click(function(){
+    var idlist = [];
+    $('p.song').each(function(i, p){
+      idlist.push(p.getAttribute('songId'));
+      });
+    console.log(idlist);
+    $.get("/playsongs", {"ids":idlist}, function(html){
+      $('#music').html(html);
+    });
+  });
+

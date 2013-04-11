@@ -1,0 +1,23 @@
+
+block head
+  script(src='/javascripts/jquery.rdio.min.js')
+  script(type='text/javascript')
+    $(document).ready(function() {
+      $('#api').bind('ready.rdio', function() {
+        var idlist = '#{idlist}'.split(',');
+        var i =0, len=idlist.length;
+        for (; i<len; ){
+          console.log(idlist[i]);
+          $('#api').rdio().play(idlist[i]);
+        }
+        $('#api').rdio().play();
+      });
+      
+      // this is a valid playback token for localhost.
+      // but you should go get your own for your own domain.
+      $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');
+    });
+
+block content
+  h2 Music will play
+  #api

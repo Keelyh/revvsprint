@@ -6,7 +6,7 @@ var Rdio = require('node-rdio')
   , Activity = mongoose.model('Activity');
 
 exports.index = function(req, res){
-	res.render('index', {title: 'Musicify'});
+	res.render('index', {title: 'Tempo'});
 }
 
 exports.showsongs = function(req, res){
@@ -16,12 +16,16 @@ exports.showsongs = function(req, res){
 	});
 }
 
+exports.playsongs = function(req, res){
+	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids});
+}
+
 exports.playSong = function(req, res){
-	res.render('music', { title: 'Musica', id: req.params.key });
+	res.render('music', { title: 'Tempo', id: req.params.key });
 }
 
 exports.homepage = function(req, res) {
-	res.render('homepage', { title: 'Musicify'});
+	res.render('homepage', { title: 'Tempo'});
 }
 
 exports.addToMongo = function(req, res){
@@ -46,7 +50,7 @@ exports.addToMongo = function(req, res){
 
 exports.myroutines = function(req, res){
 	Routine.find().populate('_activities').exec(function (err, routines){
-		res.render('myroutines', {title:'Musicify', routines: routines});
+		res.render('myroutines', {title:'Tempo', routines: routines});
 	});
 }
 
@@ -54,7 +58,7 @@ exports.myroutines = function(req, res){
 exports.songsinroutine = function(req, res){
 	Routine.find({'title':req.body.title}).populate('_activities').exec(function (err, routine){
 		console.log(routine);
-		res.render('_songsinroutine', {title:'Musicify', routine: routine});
+		res.render('_songsinroutine', {title:'Tempo', routine: routine});
 	});
-	//res.render('_songsinroutine', {title:'Musicify'});
+	//res.render('_songsinroutine', {title:'Tempo'});
 };
