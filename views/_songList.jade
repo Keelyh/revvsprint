@@ -1,4 +1,4 @@
-h3 Select your song
+h3 Click song to add activity to routine
 each song, i in songs
   .selectSong.simplemodal-close(style='padding: 5px')
     input(type='hidden', value=song.name)
@@ -16,6 +16,19 @@ script
     $('#songName').val($(this).children(':nth-child(1)').val());
     $('#artist').val($(this).children(':nth-child(2)').val());
     $('#key').val($(this).children(':nth-child(3)').val());
-    $('#song-duration').val($(this).children(':nth-child(4)').val())
+    $('#song-duration').val($(this).children(':nth-child(4)').val());
+    var act = $('#activity').val();
+    var song = $('#songName').val();
+    var duration = $('#duration').val();
+    if (duration == '') {
+      duration = $('#song-duration').val();
+    }
+    var artist = $('#artist').val();
+    var key = $('#key').val();
+    $('<li id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-move"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
+    $('#activity').val('');
+    $('#duration').val('');
+    $('#songName').val('');
+    i++;
     return false;
   })

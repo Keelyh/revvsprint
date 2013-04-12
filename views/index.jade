@@ -28,13 +28,12 @@ block content
         .input-append
           input#songName(type='text', name = 'song', placeholder = 'Song Name')
           &nbsp;
-          input.btn(type='submit', value = 'Search Song', class = 'songSearch', onClick = "showsongs(this); return false")
+          input.btn(type='submit', value = 'Find Song and Add to Routine', class = 'songSearch', onClick = "showsongs(this); return false")
           &nbsp;
           input#artist(type='hidden')
           input#key(type='hidden')
-          input#song-duration(type='hidden')
-          input.btn(type='submit', value = 'Add to Routine', class = 'addActivity')       
-    .row.hideRoutine(style='display:show; margin-top:30px')
+          input#song-duration(type='hidden')      
+    .row(style='margin-top:30px')
       fieldsest
         legend Your Routine: &nbsp;
           input#routineName(type='text', placeholder= 'Routine Name')
@@ -57,23 +56,6 @@ block content
         return false;
       })
     };
-    $('.addActivity').click(function() {
-      $('.hideRoutine').show();
-      var act = $('#activity').val();
-      var song = $('#songName').val();
-      var duration = $('#duration').val();
-      if (duration == '') {
-        duration = $('#song-duration').val();
-      }
-      var artist = $('#artist').val();
-      var key = $('#key').val();
-      $('<li id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-move"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
-      $('#activity').val('');
-      $('#duration').val('');
-      $('#songName').val('');
-      i++;
-      return false;
-    })
     $('#submitRoutine').click(function() {
       var routineName = $('#routineName').val();
       var ids = $('#sortable').sortable('toArray');
