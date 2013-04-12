@@ -1,28 +1,30 @@
 extends layout 
-block head
-  link(rel='stylesheet', href='/stylesheets/myroutines.css')
 
 block content
   .container
     .row
-      .span2#routinelist
-        .row
-          h3 My Routines
-        ul.nav.nav-list.bs-docs-sidenav  
-        for routine in routines
-          li
-            p.routineName(id='#{routine.title}', style='cursor: pointer;') #{routine.title} 
-              i.icon-chevron-right  
-      .span8
-        #songlist
+        .tabbable.tabs-left
+          ul.nav.nav-tabs
+            li.nav-header(style='font-size:12pt') My Routines
+            each routine, i in routines
+              li.routineName(id='#{routine.title}', num = i)
+                a(href="#tab"+i, data-toggle="tab") #{routine.title} 
+                  i.icon-chevron-right
+          .tab-content
+            each routine, i in routines
+              .tab-pane(id='tab' + i)
 
   script
     $('.routineName').click(function(){
       $('.routineName').removeClass("active");
+      $('.tab-pane').removeClass('active');
       $(this).addClass("active");
+      var num = $(this).attr('num');
+      $('#tab'+num).addClass("active");
       $.post("/songsinroutine", {"title":this.id}, function(html){
         console.log(html);
-        $('#songlist').html(html);
+        $('#tab' + num).html(html);
+        console.log(num);
         });
       return false;
     });

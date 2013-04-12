@@ -14,24 +14,21 @@ body {
   width: 50%;	
 }*/
 
-.active{
-	background-color: #aee3ff;
-	border-radius: 10px;
-}
-.routineName{
+/*.routineName{
 	padding-left: 30px;
 	padding: 10px;
+	cursor: pointer;
 
-}
-#routinelist{
+}*/
+/*#routinelist{
 	padding-left: 20px;
-}
+}*/
 
-#fullroutine{
+/*#fullroutine{
 	padding: 20px;
 	border-radius: 10px;
 	background-color: #aee3ff;
-}
+}*/
 .span8{
 	margin: 0
 }
