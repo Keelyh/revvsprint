@@ -11,6 +11,7 @@ exports.index = function(req, res){
 
 exports.showsongs = function(req, res){
 	var rdio = new Rdio([process.env.CONSUMER_KEY, process.env.CONSUMER_SECRET]);
+	console.log(req.body.query);
 	rdio.call('search', {'query': req.body.query, 'types': 'Track', 'never_or': 'true', 'count': 7}, function(err, songs) {
 		res.render('_songList', {title: 'Song List', songs: songs.result.results});
 	});
@@ -18,10 +19,6 @@ exports.showsongs = function(req, res){
 
 exports.playsongs = function(req, res){
 	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids, durations:req.query.durations});
-}
-
-exports.playSong = function(req, res){
-	res.render('music', { title: 'Tempo', id: req.params.key });
 }
 
 exports.homepage = function(req, res) {

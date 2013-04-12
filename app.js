@@ -46,7 +46,6 @@ app.get('/', routes.homepage);
 app.get('/newRoutine', routes.index);
 app.get('/myroutines', routes.myroutines);
 //app.post('/search', routes.getSongKey);
-app.get('/play/:key', routes.playSong);
 app.post('/showsongs', routes.showsongs);
 app.get('/playsongs', routes.playsongs);
 //app.post('/addsong', routes.addsong);

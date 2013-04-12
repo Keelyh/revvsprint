@@ -9,8 +9,8 @@
       b Song
     .span3
       b Artist
-  for song in routine[0]._activities
-    .row.song(songId=song.songKey, duration=song.duration)
+  each song, i in routine[0]._activities
+    .row.song(songId=song.songKey, duration=song.duration, id = 'song' + i)
       .span2 #{song.name}
       .span1 #{song.duration}s
       .span3 #{song.songName}

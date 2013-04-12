@@ -21,6 +21,8 @@ block head
         } else if (playState==1) {
           playNextSong = 0;
         }
+        $('.song').css('background-color','white');
+        $('#song' + i).css('background-color','#EAEAEA');
       });
       $('#api').bind('positionChanged.rdio', function(e, position) {
         if (position>=durations[i]) {
@@ -34,5 +36,4 @@ block head
     });
 
 block content
-  h4 Music will play
   #api

@@ -21,17 +21,18 @@ block content
         legend Add an Activity
     .row
       form
-        .span2
-          input#activity(type='text', name = 'activity', placeholder = 'Activity')
-        .span2.offset1
-          input#duration(type='text', name = 'duration', placeholder = 'Duration')
-          //input(type='text', name = 'duration', placeholder = 'Duration')
-        .span5.offset1.input-append
+        input#activity(type='text', name = 'activity', placeholder = 'Activity')
+        &nbsp;
+        input.input-small#duration(type='text', name = 'duration', placeholder = 'Duration')
+        &nbsp;
+        .input-append
           input#songName(type='text', name = 'song', placeholder = 'Song Name')
+          &nbsp;
           input.btn(type='submit', value = 'Search Song', class = 'songSearch', onClick = "showsongs(this); return false")
+          &nbsp;
           input#artist(type='hidden')
           input#key(type='hidden')
-        .span1
+          input#song-duration(type='hidden')
           input.btn(type='submit', value = 'Add to Routine', class = 'addActivity')       
     .row.hideRoutine(style='display:show; margin-top:30px')
       fieldsest
@@ -49,7 +50,7 @@ block content
   script(type='text/javascript')
     var i = 0;
     function showsongs(e){
-      $.post('/showsongs', {'query': e.previousSibling.value}, function(html){
+      $.post('/showsongs', {'query': e.previousSibling.previousSibling.value}, function(html){
         var div = document.createElement("div");
         div.innerHTML = html;
         $.modal(html);
@@ -61,6 +62,9 @@ block content
       var act = $('#activity').val();
       var song = $('#songName').val();
       var duration = $('#duration').val();
+      if (duration == '') {
+        duration = $('#song-duration').val();
+      }
       var artist = $('#artist').val();
       var key = $('#key').val();
       $('<li id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-move"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
@@ -91,4 +95,9 @@ block content
         dataType: 'json',
         contentType: 'application/json; charset=utf-8'
         })
+      $('#sortable').html('');
+      $('#activity').val('');
+      $('#duration').val('');
+      $('#routineName').val('');
+      $('#songName').val('');
       });

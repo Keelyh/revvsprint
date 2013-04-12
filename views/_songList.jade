@@ -1,9 +1,10 @@
 h3 Select your song
 each song, i in songs
   .selectSong.simplemodal-close(style='padding: 5px')
-    input#song(type='hidden', value=song.name)
-    input#artist(type='hidden', value=song.artist)
-    input#key(type='hidden', value=song.key)
+    input(type='hidden', value=song.name)
+    input(type='hidden', value=song.artist)
+    input(type='hidden', value=song.key)
+    input(type='hidden', value=song.duration)
     div(style='cursor: pointer')
       i.icon-ok.icon-white
       | &nbsp; 
@@ -15,5 +16,6 @@ script
     $('#songName').val($(this).children(':nth-child(1)').val());
     $('#artist').val($(this).children(':nth-child(2)').val());
     $('#key').val($(this).children(':nth-child(3)').val());
+    $('#song-duration').val($(this).children(':nth-child(4)').val())
     return false;
   })

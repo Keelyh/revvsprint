@@ -1,13 +1,13 @@
 extends layout 
 block head
   link(rel='stylesheet', href='/stylesheets/home.css')
+  link(href='http://fonts.googleapis.com/css?family=Noto+Sans:700italic', rel='stylesheet', type='text/css')
+
 
 block content
   .container
-    h1 Welcome to #{title}
-    br
-    div(id = 'logo')
-      img(width='200', height='200', src='http://www.reactable.com/mobile/manual/icons/tempo_tempo.png')
-
+    .row#title-row
+      img.center(width='200', height='200', src='http://www.reactable.com/mobile/manual/icons/tempo_tempo.png')
+      p.center#title Tempo
     div(id = 'quote')
       h3 Add some music to your morning routine
