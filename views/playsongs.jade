@@ -3,6 +3,7 @@ block head
   script(src='/javascripts/jquery.rdio.min.js')
   script(type='text/javascript')
     var idlist = '#{idlist}'.split(',');
+    var durations = '#{durations}'.split(',');
     var i = 0, len=idlist.length;
     var playNextSong = 1;
     $(document).ready(function() {
@@ -11,7 +12,7 @@ block head
         // $(this).rdio().play('t27908546');
       });
       $('#api').bind('playStateChanged.rdio', function(e, playState) {
-        if (playNextSong == 0 && playState == 2 && i < len-1) {
+        if (playNextSong == 0 && (playState == 0 || playState == 2) && i < len-1) {
           // if playNextSong was off but playback stopped (playState = 2), play next.
           playNextSong = 1;
           i++;
@@ -21,6 +22,12 @@ block head
           playNextSong = 0;
         }
       });
+      $('#api').bind('positionChanged.rdio', function(e, position) {
+        if (position>=durations[i]) {
+          $('#api').rdio().pause();
+          playNextSong = 0;
+        }        
+        });
       // this is a valid playback token for localhost.
       // but you should go get your own for your own domain.
       $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');

@@ -10,9 +10,10 @@ block content
               li.routineName(id='#{routine.title}', num = i)
                 a(href="#tab"+i, data-toggle="tab") #{routine.title} 
                   i.icon-chevron-right
-          .tab-content
-            each routine, i in routines
-              .tab-pane(id='tab' + i)
+          .span9
+            .tab-content
+              each routine, i in routines
+                .tab-pane(id='tab' + i)
 
   script
     $('.routineName').click(function(){
@@ -23,7 +24,7 @@ block content
       $('#tab'+num).addClass("active");
       $.post("/songsinroutine", {"title":this.id}, function(html){
         console.log(html);
-        $('#tab' + num).html(html);
+        $('.span9').html(html);
         console.log(num);
         });
       return false;

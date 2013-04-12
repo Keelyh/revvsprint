@@ -17,7 +17,7 @@ exports.showsongs = function(req, res){
 }
 
 exports.playsongs = function(req, res){
-	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids});
+	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids, durations:req.query.durations});
 }
 
 exports.playSong = function(req, res){
@@ -37,7 +37,9 @@ exports.addToMongo = function(req, res){
 				name: activity[0],
 				playOrder: activity[1],
 				songName: activity[2],
-				songKey: activity[3]
+				songKey: activity[3],
+				duration: activity[4],
+				songArtist: activity[5]
 			}).save(function(err, actDoc){
 				if (err) throw err;
 				routine.update( { $push: {_activities: actDoc}}, function(err){

@@ -3,28 +3,36 @@
   .row
     .span2
       b Activity
+    .span1
+      b Duration
     .span3
       b Song
+    .span3
+      b Artist
   for song in routine[0]._activities
-    .row.song(songId=song.songKey)
+    .row.song(songId=song.songKey, duration=song.duration)
       .span2 #{song.name}
-      .span4 #{song.songName}
+      .span1 #{song.duration}s
+      .span3 #{song.songName}
+      .span3 #{song.songArtist}
   br
-  br
-  br
-  button.btn(id= 'playbutton', type='button') Play
-  &nbsp; &nbsp; &nbsp;
-  button.btn(id= 'editbutton', type='button') Edit
+  .row
+    .span1
+      button.btn(id= 'playbutton', type='button') Play
+    .span1
+      button.btn(id= 'editbutton', type='button') Edit
   #music
 
 script
   $('#playbutton').click(function(){
     var idlist = [];
-    $('p.song').each(function(i, p){
-      idlist.push(p.getAttribute('songId'));
+    var durations = [];
+    $('.song').each(function(i, element){
+      idlist.push(element.getAttribute('songId'));
+      durations.push(element.getAttribute('duration'));
       });
     console.log(idlist);
-    $.get("/playsongs", {"ids":idlist}, function(html){
+    $.get("/playsongs", {"ids":idlist, "durations":durations}, function(html){
       $('#music').html(html);
     });
   });
