@@ -1,11 +1,26 @@
-
-h3 #{routine[0].title}
-for song in routine[0]._activities
-  p.song(songId=song.songKey) #{song.songName}
-button.btn(id= 'playbutton', type='button') Play
-&nbsp;
-button.btn(id= 'editbutton', type='button') Edit
-#music
+#fullroutine
+  h3 #{routine[0].title}
+  .span1
+    |Order
+  .span2
+    |Activity
+  .span4
+    |Song
+  br
+  for song in routine[0]._activities
+    p.song(songId=song.songKey) 
+      .span1 #{song.playOrder} 
+      .span2 #{song.name}
+      .span4 #{song.songName}
+  br
+  br
+  br
+  br
+  br
+  button.btn(id= 'playbutton', type='button') Play
+  &nbsp; &nbsp; &nbsp;
+  button.btn(id= 'editbutton', type='button') Edit
+  #music
 
 script
   $('#playbutton').click(function(){
@@ -13,6 +28,7 @@ script
     $('p.song').each(function(i, p){
       idlist.push(p.getAttribute('songId'));
       });
+    console.log(idlist);
     $.get("/playsongs", {"ids":idlist}, function(html){
       $('#music').html(html);
     });

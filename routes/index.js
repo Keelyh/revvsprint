@@ -45,6 +45,7 @@ exports.addToMongo = function(req, res){
 				});
 			});
 		});
+	res.redirect('/newRoutine');
 	});
 }
 

@@ -1,22 +1,27 @@
 extends layout 
-
+block head
+  link(rel='stylesheet', href='/stylesheets/myroutines.css')
 
 block content
-  .container#routinelist
+  .container
     .row
-      .span6
+      .span2#routinelist
         .row
           h3 My Routines
+        ul.nav.nav-list.bs-docs-sidenav  
         for routine in routines
-          .row
-            .routineName(id='#{routine.title}') #{routine.title}
-            br
-      .span6
+          li
+            p.routineName(id='#{routine.title}', style='cursor: pointer;') #{routine.title} 
+              i.icon-chevron-right  
+      .span8
         #songlist
 
   script
     $('.routineName').click(function(){
+      $('.routineName').removeClass("active");
+      $(this).addClass("active");
       $.post("/songsinroutine", {"title":this.id}, function(html){
+        console.log(html);
         $('#songlist').html(html);
         });
       return false;

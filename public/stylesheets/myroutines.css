@@ -3,7 +3,7 @@ body {
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
 
-#routinelist {
+/*#routinelist {
   display: inline-block;
   width: 50%;
   text-align: left;
@@ -12,4 +12,26 @@ body {
 #songlist{
   display: inline-block;
   width: 50%;	
+}*/
+
+.active{
+	background-color: #aee3ff;
+	border-radius: 10px;
+}
+.routineName{
+	padding-left: 30px;
+	padding: 10px;
+
+}
+#routinelist{
+	padding-left: 20px;
+}
+
+#fullroutine{
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #aee3ff;
+}
+.span8{
+	margin: 0
 }
