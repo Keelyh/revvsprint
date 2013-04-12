@@ -1,19 +1,14 @@
 #fullroutine
   h3 #{routine[0].title}
-  .span1
-    |Order
-  .span2
-    |Activity
-  .span4
-    |Song
-  br
+  .row
+    .span2
+      b Activity
+    .span3
+      b Song
   for song in routine[0]._activities
-    p.song(songId=song.songKey) 
-      .span1 #{song.playOrder} 
+    .row.song(songId=song.songKey)
       .span2 #{song.name}
       .span4 #{song.songName}
-  br
-  br
   br
   br
   br
