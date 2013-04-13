@@ -45,10 +45,8 @@ app.configure('development', function(){
 app.get('/', routes.homepage);
 app.get('/newRoutine', routes.index);
 app.get('/myroutines', routes.myroutines);
-//app.post('/search', routes.getSongKey);
 app.post('/showsongs', routes.showsongs);
 app.get('/playsongs', routes.playsongs);
-//app.post('/addsong', routes.addsong);
 app.post('/newRoutine', routes.addToMongo);
 app.post('/songsinroutine', routes.songsinroutine);
 

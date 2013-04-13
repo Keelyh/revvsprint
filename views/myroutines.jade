@@ -11,21 +11,19 @@ block content
                 a(href="#tab"+i, data-toggle="tab") #{routine.title} 
                   i.icon-chevron-right(style='float:right;')
                   &nbsp;
-          .span9
-            .tab-content
-              each routine, i in routines
-                .tab-pane(id='tab' + i)
+          .tab-content
+            .tab-pane.active
+              #tab-content
 
   script
     $('.routineName').click(function(){
       $('.routineName').removeClass("active");
-      $('.tab-pane').removeClass('active');
       $(this).addClass("active");
       var num = $(this).attr('num');
       $('#tab'+num).addClass("active");
       $.post("/songsinroutine", {"title":this.id}, function(html){
         console.log(html);
-        $('.span9').html(html);
+        $('#tab-content').html(html);
         console.log(num);
         });
       return false;

@@ -1,27 +1,25 @@
-#fullroutine
-  h3 #{routine[0].title}
-  .row
-    .span2
-      b Activity
-    .span1
-      b Duration
-    .span3
-      b Song
-    .span3
-      b Artist
-  each song, i in routine[0]._activities
-    .row.song(songId=song.songKey, duration=song.duration, id = 'song' + i)
-      .span2 #{song.name}
-      .span1 #{song.duration}s
-      .span3 #{song.songName}
-      .span3 #{song.songArtist}
-  br
-  .row
-    .span1
-      button.btn(id= 'playbutton', type='button') Play
-    .span1
-      button.btn(id= 'editbutton', type='button') Edit
-  #music
+h3 #{routine[0].title}
+table.table.table-condensed
+  thead
+    tr
+      th Activity
+      th Duration
+      th Song
+      th Artist
+  tbody
+    each song, i in routine[0]._activities
+      tr.song(songId=song.songKey, duration=song.duration, id = 'song' + i)
+        td #{song.name}
+        td #{song.duration}s
+        td #{song.songName}
+        td #{song.songArtist}
+br
+.row
+  .span1
+    button.btn#playbutton(type='button') Play
+  .span1
+    button.btn#editbutton(type='button') Edit
+#music
 
 script
   $('#playbutton').click(function(){
@@ -31,7 +29,6 @@ script
       idlist.push(element.getAttribute('songId'));
       durations.push(element.getAttribute('duration'));
       });
-    console.log(idlist);
     $.get("/playsongs", {"ids":idlist, "durations":durations}, function(html){
       $('#music').html(html);
     });

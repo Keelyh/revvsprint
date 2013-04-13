@@ -9,20 +9,20 @@ block head
     $(document).ready(function() {
       $('#api').bind('ready.rdio', function() {
         $(this).rdio().play(idlist[i]);
-        // $(this).rdio().play('t27908546');
+        $('#song0').css('background-color','#EAEAEA');
       });
       $('#api').bind('playStateChanged.rdio', function(e, playState) {
         if (playNextSong == 0 && (playState == 0 || playState == 2) && i < len-1) {
-          // if playNextSong was off but playback stopped (playState = 2), play next.
+          // if playNextSong was off but playback stopped/paused (playState = 2/0),
+          // ready for next song.
           playNextSong = 1;
           i++;
           $(this).rdio().play(idlist[i]);
-          // $(this).rdio().play('t2843284');
+          $('.song').css('background-color','white');
+          $('#song' + i).css('background-color','#EAEAEA');
         } else if (playState==1) {
           playNextSong = 0;
         }
-        $('.song').css('background-color','white');
-        $('#song' + i).css('background-color','#EAEAEA');
       });
       $('#api').bind('positionChanged.rdio', function(e, position) {
         if (position>=durations[i]) {

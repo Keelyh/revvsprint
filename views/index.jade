@@ -3,11 +3,10 @@ extends layout
 block head
   script(src='/javascripts/jquery.simplemodal.1.4.4.min.js')
   script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js')
-  link(rel='stylesheet', href='/stylesheets/basic.css')
-  
+  link(rel='stylesheet', href='/stylesheets/modal_basic.css')
   
   //if lt IE 7
-    link(rel='stylesheet', href='/stylesheets/basic_ie.css')
+    link(rel='stylesheet', href='/stylesheets/modal_basic_ie.css')
   script(type='text/javascript')
     $(function() {
       $( "#sortable" ).sortable();
@@ -23,16 +22,14 @@ block content
       form
         input#activity(type='text', name = 'activity', placeholder = 'Activity')
         &nbsp;
-        input.input-small#duration(type='text', name = 'duration', placeholder = 'Duration')
+        input.input-small#duration(type='text', name = 'duration', placeholder = 'Duration (s)')
         &nbsp;
         .input-append
           input#songName(type='text', name = 'song', placeholder = 'Song Name')
           &nbsp;
           input.btn(type='submit', value = 'Find Song and Add to Routine', class = 'songSearch', onClick = "showsongs(this); return false")
-          &nbsp;
           input#artist(type='hidden')
-          input#key(type='hidden')
-          input#song-duration(type='hidden')      
+          input#key(type='hidden')    
     .row(style='margin-top:30px')
       fieldsest
         legend Your Routine: &nbsp;
@@ -48,10 +45,10 @@ block content
 
   script(type='text/javascript')
     var i = 0;
-    function showsongs(e){
-      $.post('/showsongs', {'query': e.previousSibling.previousSibling.value}, function(html){
-        var div = document.createElement("div");
-        div.innerHTML = html;
+    function showsongs(button){
+      $.post('/showsongs', {'query': button.previousSibling.previousSibling.value}, function(html){
+        // var div = document.createElement("div");
+        // div.innerHTML = html;
         $.modal(html);
         return false;
       })
