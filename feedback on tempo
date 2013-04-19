@@ -1,0 +1,22 @@
+why check marks?
+make buttons for song selection
+make it in minutes, not seconds
+instead of draggable icon, use line line line
+adding an activity should be part of the routine
+can't edit or delete activities
+want to see duration of activities
+activities in table view rather than a bulleted list
+display total time of duration
+use color to distinguish different options - save should be more vibrant or higher effor than other buttons
+have the song length show up, also a preview option
+instead of the modal, use a typeahead (because you have to close it if your search thing doesn't work - we need ability to refine query)
+make it clear the song search button allows you to type in a song name or artist name
+choose all attributes of activity, then click save
+expectations at song transition: start beeping, fade out, text to speech
+while playing: progress dialog to show how far along in the activity you are
+thought maybe they could skip between activities
+alternate suggestion: you choose the playlist, then set up the activities and it'll not cut songs short but instead beep or whatever
+a routine could involve defining the activities and durations, but then you can go back later and define the song that way you can separate when you're thinking about song flow and activity flow
+what about making it like a wizard? first, what are all the activities you do in the morning? then, estimate how long each of them takes. lastly, what do you want to listen to while you're doing those things?
+first thing to do should be naming the routine, then you're adding stuff to the bottom of the list
+communicate to the user that there's a typeahead - can write loading, use a loading icon. show that pressing enter doesn't do anything
