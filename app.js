@@ -49,6 +49,8 @@ app.post('/showsongs', routes.showsongs);
 app.get('/playsongs', routes.playsongs);
 app.post('/newRoutine', routes.addToMongo);
 app.post('/songsinroutine', routes.songsinroutine);
+app.post('/removeRoutine', routes.removeRoutine);
+app.get('/populate', routes.populate);
 
 
 http.createServer(app).listen(app.get('port'), function(){

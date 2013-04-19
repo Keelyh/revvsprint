@@ -57,6 +57,35 @@ exports.myroutines = function(req, res){
 exports.songsinroutine = function(req, res){
 	Routine.find({'title':req.body.title}).populate('_activities', null, null, { sort: [['order', 'asc']] }).exec(function (err, routine){
 		console.log(routine);
-		res.render('_songsinroutine', {title:'Tempo', routine: routine});
+		res.render('_songsinroutine', {title:'Tempo', routine: routine, index:req.body.index});
 	});
 };
+
+exports.removeRoutine = function(req, res){
+	Routine.findOneAndRemove({'title':req.body.title}).exec(function(err){
+		if (err) { throw err; }
+		console.log("found and removed");
+		return res.send(true);
+	});
+}
+
+exports.populate = function(req, res){
+	new Routine({
+		title: 'Sample Routine'
+	}).save(function(err, routine){
+		new Activity({
+			name: 'wake up',
+			playOrder: 0,
+			songName: 'All Night Longer',
+			songKey: 't19725891',
+			duration: 30,
+			songArtist: 'Sammy Adams'
+		}).save(function(err, actDoc){
+			if (err) throw err;
+			routine.update( { $push: {_activities: actDoc}}, function(err){
+				if (err) throw err;
+				res.send('Routine added!');
+			});
+		});
+	});
+}
