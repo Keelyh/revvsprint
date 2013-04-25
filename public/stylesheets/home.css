@@ -1,8 +1,8 @@
 #quote {
 	font-style:italic;
 	vertical-align:middle;
-	text-align: center;
-	padding: 20px;
+	color: white;
+	font-style: italic;
 }
 
 #title {
@@ -13,11 +13,14 @@
 	font-family:'Noto Sans', sans-serif;
 	font-size:150px;'
 }
-#title-row{
+
+.center {
+	display: inline-block;
 	text-align: center;
-	padding: 20px;
 }
 
-.center{
-	display: inline-block;
+body {
+background-image:url('https://x.myspacecdn.com/new/common/images/splash/splash_background.jpg');
+background-repeat:no-repeat;
+background-position:right top;
 }

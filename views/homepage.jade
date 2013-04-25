@@ -3,11 +3,19 @@ block head
   link(rel='stylesheet', href='/stylesheets/home.css')
   link(href='http://fonts.googleapis.com/css?family=Noto+Sans:700italic', rel='stylesheet', type='text/css')
 
-
 block content
   .container
-    .row#title-row
-      img.center(width='200', height='200', src='http://www.reactable.com/mobile/manual/icons/tempo_tempo.png')
-      p.center#title Tempo
-    div(id = 'quote')
-      h2 Add some music to your routine
+    .row(style='margin-top:20px;')
+      .span2.offset8
+        button.btn.btn-large.btn-primary.span2(type='button')
+          b Log In
+      .span2
+        button.btn.btn-large.span2(type='button')
+          b Sign Up
+    .row.text-center(style='margin-top:40px;')
+      img(src='/images/Tempologo.png')
+    .row#quote(style='margin-top:20px;')
+      h2.text-center Power through the mundane
+    .row.text-center(style='margin-top:50px;')
+      button.btn.btn-large.btn-success(type='button')
+        h2 Give it a whirl
