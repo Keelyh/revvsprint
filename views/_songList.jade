@@ -20,7 +20,7 @@ script
     }
     var artist = $('#artist').val();
     var key = $('#key').val();
-    $('<li id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-move"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
+    $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
     $('#activity').val('');
     $('#duration').val('');
     $('#songName').val('');

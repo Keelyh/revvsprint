@@ -9,11 +9,11 @@ exports.index = function(req, res){
 	res.render('index', {title: 'Tempo'});
 }
 
-exports.showsongs = function(req, res){
+exports.searchSongs = function(req, res){
 	var rdio = new Rdio([process.env.CONSUMER_KEY, process.env.CONSUMER_SECRET]);
-	console.log(req.body.query);
-	rdio.call('search', {'query': req.body.query, 'types': 'Track', 'never_or': 'true', 'count': 7}, function(err, songs) {
-		res.render('_songList', {title: 'Song List', songs: songs.result.results});
+	console.log(req.query.query);
+	rdio.call('search', {'query': req.query.query, 'types': 'Track', 'never_or': 'true', 'count': 5}, function(err, songs) {
+		res.send(songs.result.results);
 	});
 }
 
