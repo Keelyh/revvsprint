@@ -34,24 +34,48 @@ block content
             .input-append
               input#songName(type='text', name = 'song', placeholder = 'Song Name', data-provide = 'typeahead', autocomplete = 'off')
               &nbsp;
-              input.btn(type='submit', value = 'Add to Routine', class = 'songSearch', onClick = "showsongs(this); return false")
-              input#artist(type='hidden')
-              input#key(type='hidden')  
+              input.btn#addSong(type='submit', value = 'Add to Routine', songName = '', duration = '', artist = '', key = '') 
 
   script(type='text/javascript')
     $('#songName').typeahead({minLength: 3,
       updater: function(selected) {
-        console.log(selected);
+        $('#addSong').attr('key', $(selected).attr('key'));
+        $('#addSong').attr('artist', $(selected).attr('artist'));
+        $('#addSong').attr('duration', $(selected).attr('duration'));
+        $('#addSong').attr('songName', $(selected).attr('songName'));
       },
       matcher: function(param) {return true},
       source: function(query, process){
         $.get('/searchSongs', {'query': query}, function(songs){
           var songArray = [];
-          songs.forEach(function(song){songArray.push(song.name + ' (' + song.artist + ')');});
+          songs.forEach(function(song) {
+            songArray.push('<span songName="' + song.name + '" artist="' + song.artist + '" key="' +song.key + '" duration="' + song.duration + '">' + song.name + '</span>' + ' - ' + song.artist);
+          });
           process(songArray);
-          })
-    }});
+        });
+      }
+    });
 
+  script(type='text/javascript')
+    $('#addSong').click(function() {
+      var songDuration = $(this).attr('duration');
+      var act = $('#activity').val();
+      var song = $(this).attr('songName');
+      var duration = $('#duration').val();
+      if (duration == '' || duration > songDuration) {
+        duration = songDuration;
+      }
+      var artist = $(this).attr('artist');
+      var key = $(this).attr('key');
+      $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
+      $('#activity').val('');
+      $('#duration').val('');
+      $('#songName').val('');
+      i++;
+      return false;
+    })
+
+  script(type='text/javascript')
     var i = 0;
     $('#submitRoutine').click(function() {
       var routineName = $('#routineName').val();
