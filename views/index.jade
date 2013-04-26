@@ -34,20 +34,20 @@ block content
             .input-append
               input#songName(type='text', name = 'song', placeholder = 'Song Name', data-provide = 'typeahead', autocomplete = 'off')
               &nbsp;
-              input.btn(type='submit', value = 'Find Song and Add to Routine', class = 'songSearch', onClick = "showsongs(this); return false")
+              input.btn(type='submit', value = 'Add to Routine', class = 'songSearch', onClick = "showsongs(this); return false")
               input#artist(type='hidden')
               input#key(type='hidden')  
 
   script(type='text/javascript')
     $('#songName').typeahead({minLength: 3,
-      matcher: function(param) {console.log(param); return true},
+      updater: function(selected) {
+        console.log(selected);
+      },
+      matcher: function(param) {return true},
       source: function(query, process){
-        // console.log('getting songs', query);
         $.get('/searchSongs', {'query': query}, function(songs){
-          console.log('searching');
           var songArray = [];
           songs.forEach(function(song){songArray.push(song.name + ' (' + song.artist + ')');});
-          console.log('Results for', query, ': ', songArray);
           process(songArray);
           })
     }});
