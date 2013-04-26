@@ -7,13 +7,15 @@ block content
   .container
     .row(style='margin-top:20px;')
       .span2.offset8
-        button.btn.btn-large.btn-primary.span2(type='button')
-          b Log In
+        a(href='/sign_in')
+          button.btn.btn-large.btn-primary.span2(type='button')
+            b Log In
       .span2
-        button.btn.btn-large.span2(type='button')
-          b Sign Up
+        a(href='/sign_up')
+          button.btn.btn-large.span2(type='button')
+            b Sign Up
     .row.text-center(style='margin-top:40px;')
-      img(src='/images/Tempologo.png')
+      img(src='/images/Tempo_white.png')
     .row#quote(style='margin-top:20px;')
       h2.text-center Power through the mundane
     .row.text-center(style='margin-top:50px;')
