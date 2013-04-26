@@ -7,6 +7,8 @@ var express = require('express')
   , mongoose = require('mongoose')
   , models = require('./models')
   , routes = require('./routes')
+  , users = require('./routes/users')
+  , routine = require('./routes/routines')
   , http = require('http')
   , path = require('path');
 
@@ -44,14 +46,15 @@ app.configure('development', function(){
 
 app.get('/', routes.homepage);
 app.get('/newRoutine', routes.index);
-app.get('/myroutines', routes.myroutines);
+app.get('/myroutines', routine.myroutines);
 app.get('/searchSongs', routes.searchSongs);
 app.get('/playsongs', routes.playsongs);
 app.post('/newRoutine', routes.addToMongo);
-app.post('/songsinroutine', routes.songsinroutine);
-app.post('/removeRoutine', routes.removeRoutine);
+app.post('/songsinroutine', routine.songsinroutine);
+app.post('/removeRoutine', routine.removeRoutine);
 app.get('/populate', routes.populate);
-app.get('/sign_in', routes.signin);
+app.get('/sign_in', users.signin);
+app.get('/sign_up', users.signup);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
