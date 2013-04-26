@@ -1,0 +1,43 @@
+#quote {
+  font-style:italic;
+  vertical-align:middle;
+  text-align: center;
+  padding: 20px;
+}
+
+#title {
+  padding-top: 60px;
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+  font-family:'Noto Sans', sans-serif;
+  font-size:150px;'
+}
+#title-row{
+  text-align: center;
+  padding: 20px;
+}
+
+.center{
+  display: inline-block;
+}
+
+.loginbuttons{
+  text-align: center;
+}
+.or{
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 1000px;
+  line-height: 40px;
+  /*width: 40px;*/
+  font-size: 16px;
+}
+.input-large[class=input-large]{
+  height:40px;
+  font-size: 20px;
+}
+
+/*.logins{
+  width: 300px;
+}*/
