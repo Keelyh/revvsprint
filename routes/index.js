@@ -2,7 +2,6 @@ var Rdio = require('node-rdio')
   , mongoose = require('mongoose')
   , User = mongoose.model('User')
   , Routine = mongoose.model('Routine')
-  , models = require('../models')
   , Activity = mongoose.model('Activity');
 
 exports.index = function(req, res){
