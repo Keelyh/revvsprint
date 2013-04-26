@@ -93,3 +93,7 @@ exports.populate = function(req, res){
 exports.signin = function(req,res){
 	res.render('sign_in', {title:'Tempo'});
 }
+
+exports.signup = function(req,res){
+	res.render('sign_up', {title:'Tempo'});
+}

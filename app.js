@@ -52,6 +52,7 @@ app.post('/songsinroutine', routes.songsinroutine);
 app.post('/removeRoutine', routes.removeRoutine);
 app.get('/populate', routes.populate);
 app.get('/sign_in', routes.signin);
+app.get('/sign_up', routes.signup);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
