@@ -11,6 +11,21 @@ block head
       $( "#sortable" ).sortable();
       $( "#sortable" ).disableSelection();
     });
+  style
+    .draggable {
+      cursor:grab;
+      cursor:-moz-grab;
+      cursor:-webkit-grab;
+    }
+    .draggable.grabbing {
+      cursor:grabbing;
+      cursor:-moz-grabbing;
+      cursor:-webkit-grabbing;
+    }
+    i.icon-edit, i.icon-remove {
+      cursor:pointer;
+      cursor:hand;
+    }
 
 block content
   include _navbar
@@ -56,19 +71,36 @@ block content
         });
       }
     });
+    function removeActivity (activity) {
+      $(activity).parent().remove();
+    }
+    function editActivity (activity) {
+      var activity = $(activity).parent();
+      $('#activity').val($(activity).attr('activity'));
+      $('#duration').val($(activity).attr('duration'));
+      $('#songName').val($(activity).attr('song') + " - " + $(activity).attr('artist'));
+      $('#addSong').attr('key', $(activity).attr('key'));
+      $('#addSong').attr('artist', $(activity).attr('artist'));
+      $('#addSong').attr('duration', $(activity).attr('duration'));
+      $('#addSong').attr('songName', $(activity).attr('song'));
+      $(activity).remove();
+    }
 
   script(type='text/javascript')
     $('#addSong').click(function() {
-      var songDuration = $(this).attr('duration');
+      var songDuration = Number($(this).attr('duration'));
       var act = $('#activity').val();
       var song = $(this).attr('songName');
-      var duration = $('#duration').val();
+      var duration = Number($('#duration').val());
+      console.log('duration is', duration, 'songDuration is', songDuration);
+      console.log('first conditon', (duration == ''), 'second condition', (duration > songDuration))
       if (duration == '' || duration > songDuration) {
         duration = songDuration;
       }
+      console.log('now duration is', duration);
       var artist = $(this).attr('artist');
       var key = $(this).attr('key');
-      $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;'+act+': '+song + ' by ' + artist + '</li>').appendTo('#sortable');
+      $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" songDuration="' + songDuration + '" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;<i class="icon-edit" onClick="editActivity(this); return false;"></i>&nbsp;<i class="icon-remove" onClick = "removeActivity(this); return false;"></i>&nbsp;<b>'+act+': </b>'+song + ' by ' + artist + '</li>').appendTo('#sortable');
       $('#activity').val('');
       $('#duration').val('');
       $('#songName').val('');
