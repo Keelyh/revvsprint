@@ -43,6 +43,7 @@ block content
         $('#addSong').attr('artist', $(selected).attr('artist'));
         $('#addSong').attr('duration', $(selected).attr('duration'));
         $('#addSong').attr('songName', $(selected).attr('songName'));
+        return $(selected).attr('songName') + " - " + $(selected).attr('artist');
       },
       matcher: function(param) {return true},
       source: function(query, process){
