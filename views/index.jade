@@ -37,7 +37,7 @@ block content
         &nbsp;
         input.btn.btn-inverse(type='submit', value='Save Routine', id='submitRoutine')
         ul#sortable(style='list-style-type: none; margin-top:20px')
-    .row(style='margin-top:20px')
+    .row(style='margin-top:30px')
       form.form-horizontal
         .control-group
           label.control-label(for='activity') Add an Activity
@@ -100,7 +100,7 @@ block content
       console.log('now duration is', duration);
       var artist = $(this).attr('artist');
       var key = $(this).attr('key');
-      $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" songDuration="' + songDuration + '" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;<i class="icon-edit" onClick="editActivity(this); return false;"></i>&nbsp;<i class="icon-remove" onClick = "removeActivity(this); return false;"></i>&nbsp;<b>'+act+': </b>'+song + ' by ' + artist + '</li>').appendTo('#sortable');
+      $('<li class="draggable" id="'+i+'" artist="'+artist+'" song="'+song+'" key="'+key+'" duration="'+duration+'" songDuration="' + songDuration + '" activity="'+act+'"><i class="icon-resize-vertical"></i>&nbsp;|&nbsp;<i class="icon-edit" onClick="editActivity(this); return false;"></i>&nbsp;<i class="icon-remove" onClick = "removeActivity(this); return false;"></i>&nbsp;<b>'+act+': </b>'+song + ' by ' + artist + ', ' + duration + 's</li>').appendTo('#sortable');
       $('#activity').val('');
       $('#duration').val('');
       $('#songName').val('');

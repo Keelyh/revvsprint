@@ -7,7 +7,7 @@ table.table.table-condensed
       th Song
       th Artist
   tbody
-    each song, i in routine[0]._activities
+    each song, i in routine[0]._activities  
       tr.song(songId=song.songKey, duration=song.duration, id = 'song' + i)
         td #{song.name}
         td #{song.duration}s

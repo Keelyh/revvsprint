@@ -28,8 +28,9 @@ block head
         if (position>=durations[i]) {
           $('#api').rdio().pause();
           playNextSong = 0;
-        }        
-        });
+        }
+        //$('#position').css('width', Math.floor(100*position/durations[i])+'%');        
+      });
       // this is a valid playback token for localhost.
       // but you should go get your own for your own domain.
       $('#api').rdio('GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc=');

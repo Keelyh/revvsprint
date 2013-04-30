@@ -23,9 +23,7 @@ block content
       var num = $(this).attr('num');
       $('#tab'+num).addClass("active");
       $.post("/songsinroutine", {"title":this.id, "index":num}, function(html){
-        console.log(html);
         $('#tab-content').html(html);
-        console.log(num);
         });
       return false;
     });
