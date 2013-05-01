@@ -10,7 +10,6 @@ exports.index = function(req, res){
 
 exports.searchSongs = function(req, res){
 	var rdio = new Rdio([process.env.CONSUMER_KEY, process.env.CONSUMER_SECRET]);
-	console.log(req.query.query);
 	rdio.call('search', {'query': req.query.query, 'types': 'Track', 'never_or': 'true', 'count': 5}, function(err, songs) {
 		res.send(songs.result.results);
 	});
