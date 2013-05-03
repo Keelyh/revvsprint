@@ -45,3 +45,9 @@ script
       });
   });
 
+  $('#editbutton').click(function(){
+    console.log("Editing " + "#{routine[0].title}");
+    $.post("/editRoutine", {"title": "#{routine[0].title}"}, function(){
+      console.log('callback');
+    });
+  });
