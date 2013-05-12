@@ -10,7 +10,8 @@ var express = require('express')
   , users = require('./routes/users')
   , routine = require('./routes/routines')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , bcrypt = require('bcrypt');
 
 var app = express();
 
@@ -56,6 +57,7 @@ app.get('/populate', routes.populate);
 app.get('/sign_in', users.signin);
 app.get('/sign_up', users.signup);
 app.post('/editRoutine', routine.editRoutine);
+app.post('/newuser', users.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
