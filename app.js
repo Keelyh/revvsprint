@@ -23,6 +23,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,8 +58,9 @@ app.post('/removeRoutine', routine.removeRoutine);
 app.get('/populate', routes.populate);
 app.get('/sign_in', users.signin);
 app.get('/sign_up', users.signup);
-app.post('/editRoutine', routine.editRoutine);
+app.get('/editRoutine', routine.editRoutine);
 app.post('/newuser', users.create);
+app.post('/verify', users.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

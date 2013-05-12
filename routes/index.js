@@ -42,7 +42,15 @@ exports.addToMongo = function(req, res){
 				});
 			});
 		});
-	res.redirect('/myroutines');
+		console.log('session user', req.session.user.name);
+		User.findOne({name: req.session.user.name}).exec(function(err, user){
+			if (err) throw err;
+			console.log('db user', user);
+			user.update( { $push: {_routines: routine}}, function(err){
+					if (err) throw err;
+				});
+		})
+		res.redirect('/myroutines');
 	});
 }
 

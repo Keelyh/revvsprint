@@ -31,7 +31,17 @@ block content
   script
     $('#signup').click(function(){
     console.log($(this).parent().parent());
-      $.post("/newuser", {"username":$('#username').val(), "uncryptpass":$('#password').val()}, function(html){
+      $.ajax({
+        url: '/newUser',
+        type: 'POST',
+        data: JSON.stringify({'username':$('#username').val(), 'uncryptpass':$('#password').val()}),
+        dataType: 'json',        
+        contentType: 'application/json; charset=utf-8',
+        success: function(data) {
+          if (typeof data.redirect == 'string') {
+            window.location = data.redirect
+          }
+        }
       });
       return false;
     });

@@ -21,9 +21,26 @@ block content
       .row
         .or or
       .row
-        input.input-text.logins(type="text", placeholder="Username or Email")
+        input.input-text.logins#username(type="text", placeholder="Username or Email")
       .row
-        input.input-text.logins(type="text", placeholder="Password")
+        input.input-text.logins#password(type="text", placeholder="Password")
       .row
-        button.btn.btn-success.logins(type="Submit")
+        button.btn.btn-success.logins#signin(type="Submit")
           h3 Log In
+  script
+    $('#signin').click(function(){
+    console.log($(this).parent().parent());
+      $.ajax({
+        url: '/verify',
+        type: 'POST',
+        data: JSON.stringify({'username':$('#username').val(), 'uncryptpass':$('#password').val()}),
+        dataType: 'json',        
+        contentType: 'application/json; charset=utf-8',
+        success: function(data) {
+          if (typeof data.redirect == 'string') {
+            window.location = data.redirect
+          }
+        }
+      });
+      return false;
+    });

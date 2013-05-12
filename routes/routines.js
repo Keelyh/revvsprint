@@ -26,7 +26,8 @@ exports.removeRoutine = function(req, res){
 
 exports.editRoutine = function(req, res){
   Routine.find({'title':req.body.title}).populate('_activities', null, null, { sort: [['order', 'asc']] }).exec(function (err, routine){
-    console.log(routine);
-    res.render('index', {title: 'Tempo', info: routine});
+      console.log(routine);
+      res.render('index', {title: 'Tempo', routine: routine});
+      // res.send({redirect: '/myroutines'});
   });
 }

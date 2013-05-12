@@ -47,7 +47,16 @@ script
 
   $('#editbutton').click(function(){
     console.log("Editing " + "#{routine[0].title}");
-    $.post("/editRoutine", {"title": "#{routine[0].title}"}, function(){
-      console.log('callback');
-    });
+    $.ajax({
+        url: '/editRoutine',
+        type: 'GET',
+        data: JSON.stringify({'title':'#{routine[0].title}'}),
+        dataType: 'json',        
+        contentType: 'application/json; charset=utf-8',
+        success: function(data) {
+          if (typeof data.redirect == 'string') {
+            window.location = data.redirect
+          }
+        }
+      });
   });

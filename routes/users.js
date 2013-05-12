@@ -17,31 +17,31 @@ exports.signup = function(req,res){
 
 
 exports.create = function(req, res){
+  console.log(req.body);
   console.log("username:", req.body.username);
   console.log("password:", req.body.uncryptpass);
   
   var hashedPassword = bcrypt.hashSync(req.body.uncryptpass, 10);
-  var new_user = new models.User({name: req.body.username, password: hashedPassword});
+  var new_user = new User({name: req.body.username, password: hashedPassword});
   new_user.save(function(err){
     if (err) return console.log("error while saving new user" + req.body.username, err);
+    console.log(req.session);
+    req.session.user = new_user;
+    res.send({redirect: '/newRoutine'});
   });
-  req.session.user = new_user;
-  res.redirect('/');
 }
 
 exports.login = function(req,res){
-  var userPasswordHash = hashedPassword;
-  var rightEnteredPassword = "SuperSecretPassword";
-  var success  = bcrypt.compareSync(rightEnteredPassword, hashedPassword); 
-  var user = models.User.find({name: req.body.username }, function(err, docs){
-    if (err) return console.log("error finding user by that name");
-    else if (docs.length == 1){
-      console.log(docs);
-      req.session.user = docs[0];
-      res.redirect('/');
-    } else{
-      console.log("ERROR: more than one user with the same name!");
-    };
+  User.findOne({name: req.body.username}).exec(function(err, user){
+    if (err) throw err;
+    console.log('db user', user);
+    var rightEnteredPassword = user.password;
+    var success  = bcrypt.compareSync(req.body.uncryptpass, rightEnteredPassword);
+    if (success) {
+      console.log('success');
+      req.session.user = user;
+      res.send({redirect: '/myroutines'});
+    }
   });
 }
 
