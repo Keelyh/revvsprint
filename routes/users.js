@@ -23,23 +23,32 @@ exports.create = function(req, res){
   
   var hashedPassword = bcrypt.hashSync(req.body.uncryptpass, 10);
   var new_user = new User({name: req.body.username, password: hashedPassword});
-  new_user.save(function(err){
-    if (err) return console.log("error while saving new user" + req.body.username, err);
-    console.log(req.session);
-    req.session.user = new_user;
-    res.send({redirect: '/newRoutine'});
+  User.find({name: req.body.username}).exec(function(err, user){
+    if (err) throw err;
+    if (user.length == 0){
+      new_user.save(function(err){
+        if (err) return console.log("error while saving new user" + req.body.username, err);
+        req.session.user = new_user;
+        res.send({redirect: '/newRoutine'});
+      });
+    } else {
+      res.send({unique: false});
+    }
   });
 }
 
 exports.login = function(req,res){
-  User.findOne({name: req.body.username}).exec(function(err, user){
+  User.find({name: req.body.username}).exec(function(err, user){
     if (err) throw err;
-    var rightEnteredPassword = user.password;
-    var success  = bcrypt.compareSync(req.body.uncryptpass, rightEnteredPassword);
-    if (success) {
-      console.log('success');
-      req.session.user = user;
-      res.send({redirect: '/myroutines'});
+    if (user.length == 0){
+      res.send({verified: false});
+    } else {
+      var rightEnteredPassword = user[0].password;
+      var success  = bcrypt.compareSync(req.body.uncryptpass, rightEnteredPassword);
+      if (success) {
+        req.session.user = user[0];
+        res.send({redirect: '/myroutines'});
+      }
     }
   });
 }

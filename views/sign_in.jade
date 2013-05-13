@@ -31,6 +31,9 @@ block content
         dataType: 'json',        
         contentType: 'application/json; charset=utf-8',
         success: function(data) {
+          if (data.verified == false) {
+            alert('Incorrect username/password combination. Please try again or create an account.');
+          }
           if (typeof data.redirect == 'string') {
             window.location = data.redirect
           }
@@ -48,6 +51,9 @@ block content
           dataType: 'json',        
           contentType: 'application/json; charset=utf-8',
           success: function(data) {
+            if (data.verified == false) {
+              alert('Incorrect username/password combination. Please try again or create an account.');
+            }
             if (typeof data.redirect == 'string') {
               window.location = data.redirect
             }

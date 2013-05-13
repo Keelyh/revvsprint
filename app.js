@@ -69,7 +69,7 @@ app.get('/populate', checkLoggedIn(), routes.populate);
 app.get('/sign_in', users.signin);
 app.get('/sign_up', users.signup);
 app.get('/editRoutine', checkLoggedIn(), routine.editRoutine);
-app.post('/newuser', checkLoggedIn(), users.create);
+app.post('/newUser', users.create);
 app.post('/verify', users.login);
 
 http.createServer(app).listen(app.get('port'), function(){

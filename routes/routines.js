@@ -9,7 +9,7 @@ exports.myroutines = function(req, res){
     User.findOne({ name: req.session.user.name }).populate('_routines').exec(function (err, docs) {
       User.populate(docs, {path: '._activities'}, function (err, docs) {
         if (err) throw err;
-        res.render('myroutines', {title:'Tempo', routines: docs._routines});
+        res.render('myroutines', {title:'Tempo', routines: docs._routines, username: req.session.user.name});
       })
     })
   }

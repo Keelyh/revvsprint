@@ -32,6 +32,9 @@ block content
         dataType: 'json',        
         contentType: 'application/json; charset=utf-8',
         success: function(data) {
+          if (data.unique == false) {
+            alert("An account with that username already exists. Please choose another.");
+          }
           if (typeof data.redirect == 'string') {
             window.location = data.redirect
           }
@@ -49,6 +52,9 @@ block content
           dataType: 'json',        
           contentType: 'application/json; charset=utf-8',
           success: function(data) {
+            if (data.unique == false) {
+              alert("An account with that username already exists. Please choose another.");
+            }
             if (typeof data.redirect == 'string') {
               window.location = data.redirect
             }

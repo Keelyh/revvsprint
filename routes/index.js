@@ -5,7 +5,7 @@ var Rdio = require('node-rdio')
   , Activity = mongoose.model('Activity');
 
 exports.index = function(req, res){
-	res.render('index', {title: 'Tempo'});
+	res.render('index', {title: 'Tempo', username: req.session.user.name});
 }
 
 exports.searchSongs = function(req, res){
