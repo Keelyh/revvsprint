@@ -5,9 +5,19 @@ var mongoose = require('mongoose')
   , Activity = mongoose.model('Activity');
 
 exports.myroutines = function(req, res){
-  Routine.find().populate('_activities').exec(function (err, routines){
-    res.render('myroutines', {title:'Tempo', routines: routines});
-  });
+  if (req.session.user.name) {
+    User.findOne({ name: req.session.user.name }).populate('_routines').exec(function (err, docs) {
+      User.populate(docs, {path: '._activities'}, function (err, docs) {
+        if (err) throw err;
+        res.render('myroutines', {title:'Tempo', routines: docs._routines});
+      })
+    })
+  }
+  // else {
+  //   Routine.find().populate('_activities').exec(function (err, routines){
+  //     res.render('myroutines', {title:'Tempo', routines: routines});
+  //   });
+  // }
 }
 
 exports.songsinroutine = function(req, res){

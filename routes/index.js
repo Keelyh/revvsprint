@@ -27,6 +27,8 @@ exports.addToMongo = function(req, res){
 	new Routine({
 		title: req.body.routine
 	}).save(function(err, routine){
+		if (err) throw err;
+		console.log(routine);
 		req.body.activities.forEach(function(activity, order) {
 			new Activity({
 				name: activity[0],

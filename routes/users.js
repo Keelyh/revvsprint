@@ -34,7 +34,6 @@ exports.create = function(req, res){
 exports.login = function(req,res){
   User.findOne({name: req.body.username}).exec(function(err, user){
     if (err) throw err;
-    console.log('db user', user);
     var rightEnteredPassword = user.password;
     var success  = bcrypt.compareSync(req.body.uncryptpass, rightEnteredPassword);
     if (success) {

@@ -47,19 +47,29 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+function checkLoggedIn() {
+  return function(req, res, next) {
+    if (!req.session.user){
+      res.send('Please log in or sign up');
+    } else {
+      next();
+    };
+  }
+}
+
 app.get('/', routes.homepage);
-app.get('/newRoutine', routes.index);
-app.get('/myroutines', routine.myroutines);
-app.get('/searchSongs', routes.searchSongs);
-app.get('/playsongs', routes.playsongs);
-app.post('/newRoutine', routes.addToMongo);
-app.post('/songsinroutine', routine.songsinroutine);
-app.post('/removeRoutine', routine.removeRoutine);
-app.get('/populate', routes.populate);
+app.get('/newRoutine', checkLoggedIn(), routes.index);
+app.get('/myroutines', checkLoggedIn(), routine.myroutines);
+app.get('/searchSongs', checkLoggedIn(), routes.searchSongs);
+app.get('/playsongs', checkLoggedIn(), routes.playsongs);
+app.post('/newRoutine', checkLoggedIn(), routes.addToMongo);
+app.post('/songsinroutine', checkLoggedIn(), routine.songsinroutine);
+app.post('/removeRoutine', checkLoggedIn(), routine.removeRoutine);
+app.get('/populate', checkLoggedIn(), routes.populate);
 app.get('/sign_in', users.signin);
 app.get('/sign_up', users.signup);
-app.get('/editRoutine', routine.editRoutine);
-app.post('/newuser', users.create);
+app.get('/editRoutine', checkLoggedIn(), routine.editRoutine);
+app.post('/newuser', checkLoggedIn(), users.create);
 app.post('/verify', users.login);
 
 http.createServer(app).listen(app.get('port'), function(){
