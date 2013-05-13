@@ -16,7 +16,7 @@ exports.searchSongs = function(req, res){
 }
 
 exports.playsongs = function(req, res){
-	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids, durations:req.query.durations});
+	res.render('playsongs', {title: 'Tempo', idlist:req.query.ids, durations:req.query.durations, playbackToken:process.env.PLAYBACK_TOKEN});
 }
 
 exports.homepage = function(req, res) {
