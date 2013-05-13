@@ -1,0 +1,20 @@
+extends layout 
+block head
+  link(rel='stylesheet', href='/stylesheets/sign_in.css')
+  link(href='http://fonts.googleapis.com/css?family=Noto+Sans:700italic', rel='stylesheet', type='text/css')
+
+
+block content
+  .container
+    .row.text-center(style='margin-top:40px;')
+      a(href='/')
+        img(src='/images/Tempo.png')
+    .row.text-center
+      h1 Please Log In or Sign Up to use Tempo
+    .loginbuttons.centerbuttons(style='margin-top:40px;')
+      a(href = '/sign_in')
+        button.btn.btn-large.btn-success.span2(type='button')
+          b Sign In
+      a(href = '/sign_up')
+        button.btn.btn-large.btn-primary.span2(type='button')
+          b Sign Up

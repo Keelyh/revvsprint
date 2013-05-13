@@ -125,12 +125,12 @@ block content
         type: 'POST',
         data: JSON.stringify({'routine': routineName, 'activities': activityArray}),
         dataType: 'json',
-        contentType: 'application/json; charset=utf-8'
-        })
-      $('#sortable').html('');
-      $('#activity').val('');
-      $('#duration').val('');
-      $('#routineName').val('');
-      $('#songName').val('');
+        contentType: 'application/json; charset=utf-8',
+        success: function(data) {
+          if (typeof data.redirect == 'string') {
+            window.location = data.redirect
+          }
+        }
+      })
+      return false;
       });
-editRoutine

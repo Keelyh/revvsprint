@@ -9,3 +9,27 @@
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+.navbar-inner {
+  background-image: linear-gradient(to bottom, rgb(218, 114, 156), rgb(113, 4, 122));
+  border: 1px solid rgba(255, 255, 255, 0)
+ }
+
+.navbar .brand{
+  font-size: 26px;
+  color: white;
+  text-shadow: 0 1px 0 rgb(191, 137, 235);
+}
+
+.navbar .nav>li>a{
+  font-size: 16px;
+  color: white;
+  text-shadow: 0 1px 0 rgb(191, 137, 235);	
+}
+
+.a{
+	color: rgb(120, 62, 223);
+}
+
+.navbar{
+	padding-bottom: 10px;
+}

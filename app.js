@@ -50,7 +50,7 @@ app.configure('development', function(){
 function checkLoggedIn() {
   return function(req, res, next) {
     if (!req.session.user){
-      res.send('Please log in or sign up');
+      res.render('please', {title: 'Tempo'});
     } else {
       next();
     };

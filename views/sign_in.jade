@@ -16,11 +16,6 @@ block content
         img(src='/images/Tempo.png')
     .loginbuttons(style='margin-top:40px;')
       .row
-        button.btn.logins(type="button")
-          h3 Sign in with Google
-      .row
-        .or or
-      .row
         input.input-text.logins#username(type="text", placeholder="Username or Email")
       .row
         input.input-text.logins#password(type="password", placeholder="Password")
@@ -29,7 +24,6 @@ block content
           h3 Log In
   script
     $('#signin').click(function(){
-    console.log($(this).parent().parent());
       $.ajax({
         url: '/verify',
         type: 'POST',
@@ -43,4 +37,22 @@ block content
         }
       });
       return false;
+    });
+
+    $(document).keypress(function(e) {
+      if(e.which == 13) {
+        $.ajax({
+          url: '/verify',
+          type: 'POST',
+          data: JSON.stringify({'username':$('#username').val(), 'uncryptpass':$('#password').val()}),
+          dataType: 'json',        
+          contentType: 'application/json; charset=utf-8',
+          success: function(data) {
+            if (typeof data.redirect == 'string') {
+              window.location = data.redirect
+            }
+          }
+        });
+        return false;
+      };
     });

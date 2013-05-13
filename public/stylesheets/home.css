@@ -20,8 +20,8 @@
 }
 
 body {
-background-image:url('https://x.myspacecdn.com/new/common/images/splash/splash_background.jpg');
-background-repeat:no-repeat;
-background-position:right top;
-width: 100%;
+	background-image:url('https://x.myspacecdn.com/new/common/images/splash/splash_background.jpg');
+	background-repeat:no-repeat;
+	background-position:right top;
+	background-size: cover;
 }

@@ -50,9 +50,10 @@ exports.addToMongo = function(req, res){
 			console.log('db user', user);
 			user.update( { $push: {_routines: routine}}, function(err){
 					if (err) throw err;
+					// res.redirect('/myroutines');
+					res.send({redirect: '/myroutines'});
 				});
 		})
-		res.redirect('/myroutines');
 	});
 }
 
